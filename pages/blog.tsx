@@ -3,6 +3,49 @@ import { getConfig } from '@framework/api'
 import getAllPages from '@framework/api/operations/get-all-pages'
 import { Layout } from '@components/common'
 import { Container } from '@components/ui'
+import { request } from '../lib/datocms'
+import { Image, renderMetaTags } from 'react-datocms'
+
+const BLOGPAGE_QUERY = `
+query HomePage($limit: IntType) {
+  site: _site {
+    favicon: faviconMetaTags {
+      attributes
+      content
+      tag
+    }
+  }
+  blog {
+    seo: _seoMetaTags {
+      attributes
+      content
+      tag
+    }
+  }
+  allPosts(first: $limit) {
+    id
+    title
+    excerpt
+    date
+    author {
+      name
+    }
+    coverImage {
+      responsiveImage(imgixParams: { fit: crop, w: 300, h: 300, auto: format }) {
+        srcSet
+        webpSrcSet
+        sizes
+        src
+        width
+        height
+        aspectRatio
+        alt
+        title
+        base64
+      }
+    }
+  }
+}`
 
 export async function getStaticProps({
   preview,
@@ -10,12 +53,15 @@ export async function getStaticProps({
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
   const { pages } = await getAllPages({ config, preview })
+  const data  = await request({ query: BLOGPAGE_QUERY, variables: { limit: 10 },})
+
   return {
-    props: { pages },
+    props: { pages,data },
   }
 }
 
-export default function Blog() {
+export default function Blog({data}) {
+  console.log('data here',data);
   return (
     <div className="pb-20">
       <div className="text-center pt-40 pb-56 bg-violet">
@@ -89,6 +135,14 @@ export default function Blog() {
             tootsie roll bonbon carrot cake sugar plum.
           </p>
         </div>
+      </Container>
+      <Container>
+      {data.allPosts.map((blogPost) => (
+        <article key={blogPost.id}>
+          <Image data={blogPost.coverImage.responsiveImage} />
+          <h6>{blogPost.title}</h6>
+        </article>
+      ))}
       </Container>
     </div>
   )
