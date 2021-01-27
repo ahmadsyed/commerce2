@@ -1,6 +1,8 @@
 import { Layout } from '@components/common'
-import { Container, Text } from '@components/ui'
+import { Text } from '@components/ui'
 import {request} from '../lib/datocms';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'reactstrap';
 
 export async function getStaticProps(context){
   const graphqlRequest = {
@@ -16,6 +18,8 @@ export default function Research(data) {
 
   return (
     <Container>
+      
+        <h1 className="display-4">{researchData.research}</h1>
       <div style={{backgroundImage: `url(${researchData.researchImage.url})`,height: '455px',backgroundRepeat: 'no-repeat',width: '85%'}}>
       <Text variant="pageHeading" style={{textAlign:'center'}}>{researchData.research}</Text>
       {data && (
@@ -31,7 +35,7 @@ export default function Research(data) {
         </div>
       )}
       </div>
-      
+       
     </Container>
   )
 }

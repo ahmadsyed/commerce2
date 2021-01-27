@@ -44,10 +44,14 @@
     ]
   },
   "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
     "@reach/portal": "^0.11.2",
     "@tailwindcss/ui": "^0.6.2",
     "@vercel/fetch": "^6.1.0",
     "body-scroll-lock": "^3.1.5",
+    "bootstrap": "^4.6.0",
     "bowser": "^2.11.0",
     "classnames": "^2.2.6",
     "cookie": "^0.4.1",
@@ -67,6 +71,7 @@
     "react-dom": "^16.14.0",
     "react-merge-refs": "^1.1.0",
     "react-ticker": "^1.2.2",
+    "reactstrap": "^8.9.0",
     "storefront-data-hooks": "^1.0.0",
     "swr": "^0.4.0",
     "tabbable": "^5.1.5",
