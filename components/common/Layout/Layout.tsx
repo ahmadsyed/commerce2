@@ -58,7 +58,7 @@ const Layout: FC<Props> = ({ children, pageProps }) => {
     <CommerceProvider locale={locale}>
       <div className={cn(s.root)}>
         <Navbar />
-        <main className="fit">{children}</main>
+        <main className="content">{children}</main>
         <Footer pages={pageProps.pages} />
 
         <Sidebar open={displaySidebar} onClose={closeSidebar}>
