@@ -3,6 +3,10 @@ import { Text } from '@components/ui'
 import {request} from '../lib/datocms';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'reactstrap';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</link>
+import 'react-tabs/style/react-tabs.css';
 
 export async function getStaticProps(context){
   const graphqlRequest = {
@@ -34,6 +38,27 @@ export default function Research(data) {
           </div>
         </div>
       )}
+      </div>
+      <div style={{width:'25%', position: 'relative',marginLeft: '35%'}}>
+      <Tabs>
+				<TabList>
+					<Tab>Search</Tab>
+					<Tab>Filter</Tab>
+				</TabList>
+
+				<TabPanel>
+          <input type="text" placeholder="Search.." name="search" />
+          <button type="submit"><i class="fa fa-search"></i></button>
+				</TabPanel>
+
+        <TabPanel>
+        <select name="filters" id="filters">
+          <option value="AllResearch">All Research</option>
+          
+        </select>
+				</TabPanel>
+				
+			</Tabs>
       </div>
        
     </Container>
